@@ -16,9 +16,7 @@ import { LandingPage } from './pages/landing/landing.page';
     PokemonListComponent,
     LandingFormComponent,
     TrainerComponent,
-    PokemonCataloguePage,
-    TrainerPage,
-    LandingPage
+
   ],
   imports: [
     BrowserModule,
