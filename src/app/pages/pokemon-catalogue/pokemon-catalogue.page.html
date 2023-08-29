@@ -5,7 +5,8 @@
       <img [src]="pokemon.image" alt="{{ pokemon.name }}">
       <p>{{ pokemon.name }}</p>
       <div *ngIf="pokemon.catched">hei</div>
-      <button (click)="markAsCatched(pokemon, i)">gotta catch (em all)</button>
+      <button (click)="catchAndSave(pokemon, i)">gotta catch (em all)</button>
+
     </div>
   </div>
 </div>

@@ -3,8 +3,6 @@ import { PokemonService } from 'src/app/services/pokemon.service';
 import { Pokemon } from 'src/app/models/pokemon';
 import { HttpClient } from '@angular/common/http';
 
-
-
 @Component({
   selector: 'app-pokemon-catalogue',
   templateUrl: './pokemon-catalogue.page.html',
@@ -35,32 +33,30 @@ export class PokemonCataloguePage implements OnInit {
       });
   }
 
-  saveIndexAndName(name: string, index: number): void {
-    console.log('Clicked on Pokémon with name:', name);
+  catchAndSave(pokemon: Pokemon, index: number): void {
+    console.log('Caught and saved Pokémon:', pokemon.name);
+    console.log('Index of the Pokémon:', index);
 
     const data = {
-      name: name,
+      name: pokemon.name,
       index: index + 1,
     };
 
+    const apiKey = 'jP9kL7Hn3RmTqAeWsZcXvYbUgIaOpEfDhCtVrFmNlYbUiTsWxZaQpOeHdCfGjK';
+
     this.http.post("https://assigment2-api-production.up.railway.app/trainers", data, {
       headers: {
-        'Authorization': `Bearer jP9kL7Hn3RmTqAeWsZcXvYbUgIaOpEfDhCtVrFmNlYbUiTsWxZaQpOeHdCfGjK`
+        'X-API-Key': apiKey,
+        'Content-Type': 'application/json'
       }
     }).subscribe(
       response => {
         console.log('API Response:', response);
+        pokemon.catched = true; 
       },
       error => {
         console.error('Error:', error);
       }
     );
   }
-
-  markAsCatched(pokemon: Pokemon, index: number): void {
-    console.log('Marked as catched:', pokemon.name);
-    console.log('Index of the Pokémon:', index);
-    pokemon.catched = true; 
-  }
-
 }
