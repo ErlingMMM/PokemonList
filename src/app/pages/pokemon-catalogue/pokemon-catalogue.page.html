@@ -2,7 +2,7 @@
   <div class="pokemon-card">
     <img [src]="pokemon.image" alt="{{ pokemon.name }}">
     <p>{{ pokemon.name }}</p>
-    <button (click)="logIndex(pokemon.name, i)">Log Index</button>
+    <button (click)="saveIndexAndName(pokemon.name, i)">Log Index</button>
   </div>
 </div>
 
