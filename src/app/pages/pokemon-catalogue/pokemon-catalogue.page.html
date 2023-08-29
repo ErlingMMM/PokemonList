@@ -4,7 +4,7 @@
     <div class="pokemon-card">
       <img [src]="pokemon.image" alt="{{ pokemon.name }}">
       <p>{{ pokemon.name }}</p>
-      <div *ngIf="pokemon.catched">hei</div>
+      <div *ngIf="pokemon.catched">Catched</div>
       <button (click)="catchAndSave(pokemon, i)">gotta catch (em all)</button>
 
     </div>
