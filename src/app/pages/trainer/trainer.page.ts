@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './trainer.page.html',
   styleUrls: ['./trainer.page.scss']
 })
-export class TrainerPage implements OnInit{
+export class TrainerPage implements OnInit {
 
   pokemons: Pokemon[] = [];
 
@@ -34,6 +34,4 @@ export class TrainerPage implements OnInit{
         }
       });
   }
-  
-
 }
