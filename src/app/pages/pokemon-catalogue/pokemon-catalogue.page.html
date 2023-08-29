@@ -1,11 +1,11 @@
-
 <h1>Showing 50 pokemons</h1>
 <div class="pokemon-card-container">
-<div *ngFor="let pokemon of pokemons; let i = index;">
- <div class="pokemon-card">
+  <div *ngFor="let pokemon of pokemons; let i = index;">
+    <div class="pokemon-card">
       <img [src]="pokemon.image" alt="{{ pokemon.name }}">
       <p>{{ pokemon.name }}</p>
-      <button (click)="saveIndexAndName(pokemon.name, i)">gotta catch (em all)</button>
+      <div *ngIf="pokemon.catched">hei</div>
+      <button (click)="markAsCatched(pokemon, i)">gotta catch (em all)</button>
     </div>
   </div>
 </div>
