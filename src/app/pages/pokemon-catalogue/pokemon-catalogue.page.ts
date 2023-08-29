@@ -28,5 +28,9 @@ export class PokemonCataloguePage implements OnInit {
         console.log('Fetched Pokemons:', this.pokemons);
       });
   }
+
+  logIndex(index: number): void {
+    console.log('Clicked on Pokémon with index:', index + 1);
+  }
   
 }
