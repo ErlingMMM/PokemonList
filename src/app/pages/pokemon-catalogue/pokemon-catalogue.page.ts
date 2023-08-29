@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class PokemonCataloguePage implements OnInit {
 
   pokemons: Pokemon[] = [];
+  buttonText = 'gotta catch (em all)';
 
   constructor(
     private pokemonService: PokemonService,
@@ -53,6 +54,7 @@ export class PokemonCataloguePage implements OnInit {
       response => {
         console.log('API Response:', response);
         pokemon.catched = true; 
+        alert("Catched!")
       },
       error => {
         console.error('Error:', error);

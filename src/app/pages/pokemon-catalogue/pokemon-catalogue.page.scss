@@ -1,12 +1,25 @@
 .pokemon-card-container {
     display: grid;
     grid-template-columns: auto auto auto;
-  
-  }
-  .pokemon-card {
-    background-color: #8df3a8;
+
+}
+
+.pokemon-card {
+    position: relative;
     border: 2px solid rgb(232, 227, 227);
-    font-size: 40px;
     text-align: center;
     text-transform: capitalize;
+}
+
+.pokemon-card.caught {
+    background-color: red;
   }
+  
+  .pokemon-card.not-caught {
+    background-color: #8df3a8;
+  }
+
+.pokemon-title {
+    font-size: 40px;
+}
+
