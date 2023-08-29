@@ -24,7 +24,7 @@ export class PokemonCataloguePage implements OnInit {
   }
 
   getPokemonList(): void {
-    localStorage.setItem("trainer", "kai"); //remove this when loginpage is complete is completed
+    localStorage.setItem("trainer", "kjetil"); //remove this when loginpage is complete is completed
     this.pokemonService.getPokemons()
       .subscribe(pokemonList => {
         this.pokemons = pokemonList.map((pokemon, index) => ({
