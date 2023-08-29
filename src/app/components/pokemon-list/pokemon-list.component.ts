@@ -29,6 +29,7 @@ export class PokemonListComponent implements OnInit {
     this.pokemons.forEach(pokemon => {
       this.pokemonService.getPoekomonByName(pokemon.name)
         .subscribe(details => {
+          console.log('Fetched Pokemon:', details);
           pokemon.sprites = details.sprites;
           pokemon.image = details.sprites?.front_default;
         });
