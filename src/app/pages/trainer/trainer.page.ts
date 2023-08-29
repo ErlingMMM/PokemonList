@@ -29,7 +29,6 @@ export class TrainerPage implements OnInit{
             ...pokemon,
             image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.index}.png`,
           }));
-          console.log('Fetched Pokemons:', this.pokemons);
         } else {
           console.error('Pokemon list is undefined.');
         }

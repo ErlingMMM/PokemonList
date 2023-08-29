@@ -30,14 +30,11 @@ export class PokemonCataloguePage implements OnInit {
           image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`,
           catched: false
         }));
-        console.log('Fetched Pokemons:', this.pokemons);
       });
   }
 
   catchAndSave(pokemon: Pokemon, index: number): void {
-    console.log('Caught and saved Pokémon:', pokemon.name);
-    console.log('Index of the Pokémon:', index);
-
+    
     const data = {
       name: pokemon.name,
       index: index + 1,
@@ -52,7 +49,6 @@ export class PokemonCataloguePage implements OnInit {
       }
     }).subscribe(
       response => {
-        console.log('API Response:', response);
         pokemon.catched = true; 
         alert("Catched!")
       },
