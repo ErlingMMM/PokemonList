@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Pokemon } from "../models/pokemon";
 import { Observable } from "rxjs";
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: "root" })
 export class PokemonService {
@@ -12,10 +12,9 @@ export class PokemonService {
     }
 
     getPokemons(): Observable<Pokemon[]> {
-        return this.httpClient.get<Pokemon[]>('https://pokeapi.co/api/v2/pokemon?limit=50&offset=0')
-            .pipe(
-                tap(data => console.log('Fetched Pokemons:', data))
-            );
+        return this.httpClient.get<any>('https://pokeapi.co/api/v2/pokemon?limit=50&offset=0').pipe(
+          map(response => response.results)  
+        );
     }
 
     getPoekomonByName(name:string): Observable<Pokemon> {
