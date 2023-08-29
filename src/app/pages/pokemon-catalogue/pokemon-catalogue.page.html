@@ -1,5 +1,6 @@
-
-  <div *ngFor="let pokemon of pokemons">
+<div *ngFor="let pokemon of pokemons">
+  <div class="pokemon-card">
+    <img [src]="pokemon.image" alt="{{ pokemon.name }}">
     <p>{{ pokemon.name }}</p>
   </div>
-
+</div>

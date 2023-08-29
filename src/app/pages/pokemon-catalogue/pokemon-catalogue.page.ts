@@ -21,9 +21,11 @@ export class PokemonCataloguePage implements OnInit {
   getPokemonList(): void {
     this.pokemonService.getPokemons()
       .subscribe(pokemonList => {
-        this.pokemons = pokemonList;
+        this.pokemons = pokemonList.map(pokemon => ({
+          ...pokemon,
+          image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png'
+        }));
         console.log('Fetched Pokemons:', this.pokemons);
-        
       });
   }
 }
