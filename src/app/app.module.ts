@@ -18,6 +18,7 @@ import { LandingPage } from './pages/landing/landing.page';
     PokemonCataloguePage,
     TrainerPage,
     LandingPage
+
   ],
   imports: [
     BrowserModule,
