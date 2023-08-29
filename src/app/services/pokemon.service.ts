@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Pokemon } from "../models/pokemon";
 import { Observable } from "rxjs";
-import { map, tap, filter } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: "root" })
 export class PokemonService {
@@ -20,7 +20,7 @@ export class PokemonService {
     getTrainerPokemons(): Observable<Pokemon[]> {
         return this.httpClient.get<any>('https://assigment2-api-production.up.railway.app/trainers').pipe(
             map(response => response.filter((obj: Pokemon) => obj.hasOwnProperty('index'))),
-            map(filteredResponse => filteredResponse),
+           // map(filteredResponse => filteredResponse),
         );
     }
 
