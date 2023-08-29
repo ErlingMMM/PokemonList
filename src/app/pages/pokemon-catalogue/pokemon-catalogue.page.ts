@@ -13,6 +13,7 @@ export class PokemonCataloguePage implements OnInit {
   pokemons: Pokemon[] = [];
   buttonText = 'gotta catch (em all)';
 
+
   constructor(
     private pokemonService: PokemonService,
     private http: HttpClient
@@ -23,6 +24,7 @@ export class PokemonCataloguePage implements OnInit {
   }
 
   getPokemonList(): void {
+    localStorage.setItem("trainer", "Erling");
     this.pokemonService.getPokemons()
       .subscribe(pokemonList => {
         this.pokemons = pokemonList.map((pokemon, index) => ({
@@ -34,9 +36,10 @@ export class PokemonCataloguePage implements OnInit {
   }
 
   catchAndSave(pokemon: Pokemon, index: number): void {
-    
+    const trainer = localStorage.getItem("trainer");
     const data = {
       name: pokemon.name,
+      trainer: trainer,
       index: index + 1,
     };
 
@@ -49,7 +52,7 @@ export class PokemonCataloguePage implements OnInit {
       }
     }).subscribe(
       response => {
-        pokemon.catched = true; 
+        pokemon.catched = true;
         alert("Catched!")
       },
       error => {

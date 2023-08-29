@@ -3,5 +3,6 @@ export interface Pokemon {
   image: string;
   catched: boolean;
   index: number;
+  trainer: string;
 }
 
