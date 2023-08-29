@@ -13,7 +13,6 @@ export class PokemonCataloguePage implements OnInit {
   pokemons: Pokemon[] = [];
   buttonText = 'gotta catch (em all)';
 
-
   constructor(
     private pokemonService: PokemonService,
     private http: HttpClient
@@ -24,7 +23,7 @@ export class PokemonCataloguePage implements OnInit {
   }
 
   getPokemonList(): void {
-    localStorage.setItem("trainer", "Erling"); //remove this when loginpage is complete is completed
+    localStorage.setItem("trainer", "Magnus"); // remove this when login page is complete
     this.pokemonService.getPokemons()
       .subscribe(pokemonList => {
         this.pokemons = pokemonList.map((pokemon, index) => ({
@@ -37,15 +36,45 @@ export class PokemonCataloguePage implements OnInit {
 
   catchAndSave(pokemon: Pokemon, index: number): void {
     const trainer = localStorage.getItem("trainer");
-    const data = {
-      name: pokemon.name,
+  
+    if (trainer !== null) {
+      const apiKey = 'jP9kL7Hn3RmTqAeWsZcXvYbUgIaOpEfDhCtVrFmNlYbUiTsWxZaQpOeHdCfGjK';
+  
+      this.http.get(`https://assigment2-api-production.up.railway.app/trainers?name=${trainer}`, {
+        headers: {
+          'X-API-Key': apiKey
+        }
+      }).subscribe(
+        (response: any) => {
+          if (response.length === 0) {
+            this.createTrainerAndAddPokemon(trainer, pokemon, index, apiKey);
+          } else {
+            const existingTrainer = response[0];
+            this.addPokemonToTrainer(existingTrainer.id, pokemon, index, apiKey);
+          }
+        },
+        error => {
+          console.error('Error:', error);
+        }
+      );
+    } else {
+      console.error('Trainer is null.');
+    }
+  }
+  
+
+  createTrainerAndAddPokemon(trainer: string, pokemon: Pokemon, index: number, apiKey: string): void {
+    const trainerData = {
       trainer: trainer,
-      index: index + 1,
+      pokemons: [
+        {
+          name: pokemon.name,
+          index: index + 1
+        }
+      ]
     };
 
-    const apiKey = 'jP9kL7Hn3RmTqAeWsZcXvYbUgIaOpEfDhCtVrFmNlYbUiTsWxZaQpOeHdCfGjK';
-
-    this.http.post("https://assigment2-api-production.up.railway.app/trainers", data, {
+    this.http.post("https://assigment2-api-production.up.railway.app/trainers", trainerData, {
       headers: {
         'X-API-Key': apiKey,
         'Content-Type': 'application/json'
@@ -53,7 +82,29 @@ export class PokemonCataloguePage implements OnInit {
     }).subscribe(
       response => {
         pokemon.catched = true;
-        alert("Catched!")
+        alert("Caught!")
+      },
+      error => {
+        console.error('Error:', error);
+      }
+    );
+  }
+
+  addPokemonToTrainer(trainerId: number, pokemon: Pokemon, index: number, apiKey: string): void {
+    const pokemonData = {
+      name: pokemon.name,
+      index: index + 1
+    };
+
+    this.http.post(`https://assigment2-api-production.up.railway.app/trainers/${trainerId}/pokemons`, pokemonData, {
+      headers: {
+        'X-API-Key': apiKey,
+        'Content-Type': 'application/json'
+      }
+    }).subscribe(
+      response => {
+        pokemon.catched = true;
+        alert("Caught!")
       },
       error => {
         console.error('Error:', error);
