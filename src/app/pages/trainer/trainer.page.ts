@@ -4,7 +4,7 @@ import { Pokemon } from 'src/app/models/pokemon';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-trainer',
+  selector: 'app-page-trainer',
   templateUrl: './trainer.page.html',
   styleUrls: ['./trainer.page.scss']
 })
