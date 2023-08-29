@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-trainer',
+  selector: 'app-page-trainer',
   templateUrl: './trainer.page.html',
   styleUrls: ['./trainer.page.scss']
 })

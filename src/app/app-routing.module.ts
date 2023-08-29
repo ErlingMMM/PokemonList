@@ -4,15 +4,21 @@ import { LandingPage } from './pages/landing/landing.page';
 import { PokemonCataloguePage } from './pages/pokemon-catalogue/pokemon-catalogue.page';
 import { TrainerPage } from './pages/trainer/trainer.page';
 
-const routes: Routes = [ {
-  path: '', component: TrainerPage
-},
-{
-  path: 'login', component: LandingPage
-},
-{
-  path: 'pokemons', component: PokemonCataloguePage
-}];
+const routes: Routes = [
+  {
+    path: "",
+    pathMatch: 'full',
+    redirectTo: '/login'
+  },
+  {
+    path: 'login', component: LandingPage
+  },
+  {
+    path: 'trainere', component: TrainerPage
+  },
+  {
+    path: 'pokemons', component: PokemonCataloguePage
+  }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
