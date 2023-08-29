@@ -29,8 +29,10 @@ export class PokemonCataloguePage implements OnInit {
       });
   }
 
-  logIndex(index: number): void {
-    console.log('Clicked on Pokémon with index:', index + 1);
+  logIndex(name: string, index: number): void {
+    console.log('Clicked on Pokémon with index:', name);
+    console.log(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`);
+
   }
   
 }
