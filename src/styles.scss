@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+.pokemon-card-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+
+}
+
+.pokemon-card {
+    position: relative;
+    border: 2px solid rgb(232, 227, 227);
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.pokemon-title {
+    font-size: 40px;
+}
