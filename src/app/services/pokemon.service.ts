@@ -30,7 +30,7 @@ export class PokemonService {
     }
 
 
-    getPoekomonByName(name: string): Observable<Pokemon> {
+    getPokemonByName(name: string): Observable<Pokemon> {
         return this.httpClient.get<Pokemon>(`https://pokeapi.co/api/v2/pokemon/${name}`)
             .pipe(
                 tap(data => console.log(`Fetched Pokemon ${name} Details:`, data))
