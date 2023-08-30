@@ -4,6 +4,13 @@ import { Pokemon } from "../models/pokemon";
 import { Trainer } from "../models/trainer.model";
 import { Observable, of } from "rxjs";
 import { map, tap, catchError } from 'rxjs/operators';
+import { environment } from 'src/environment/environment';
+import { v4 as uuidv4 } from 'uuid';
+import { switchMap } from "rxjs/operators";
+
+
+const url = environment.apiUsers
+const key = environment.apiKey
 
 
 @Injectable({ providedIn: "root" })
@@ -37,4 +44,45 @@ export class PokemonService {
                 tap(data => console.log(`Fetched Pokemon ${name} Details:`, data))
             );
     }
+
+
+
+
+    updateTrainersPokemons(pokemon: Pokemon, index: number, type: string): Observable<any> {
+        const trainer = localStorage.getItem("trainerName");
+        const data: Pokemon = {
+          name: pokemon.name,
+          image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`,
+          catched: false,
+          index: index + 1,
+          trainer: trainer || ''
+        };
+    
+        return this.httpClient.get<Trainer[]>(`${url}?username=${trainer}`).pipe(
+          switchMap((trainers: Trainer[]) => {
+            if (trainers.length > 0) {
+              const existingTrainer = trainers[0];
+              existingTrainer.pokemon.push(data);
+              return this.httpClient.patch(`${url}/${existingTrainer.id}`, existingTrainer, {
+                headers: {
+                  'X-API-Key': key,
+                  'Content-Type': 'application/json'
+                }
+              });
+            } else {
+              const newTrainer: Trainer = {
+                id: uuidv4(),
+                username: trainer || "",
+                pokemon: [data]
+              };
+              return this.httpClient.post<Trainer>(url, newTrainer, {
+                headers: {
+                  'X-API-Key': key,
+                  'Content-Type': 'application/json'
+                }
+              });
+            }
+          })
+        );
+      }
 }

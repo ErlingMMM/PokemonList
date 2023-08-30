@@ -4,7 +4,7 @@
     <div class="pokemon-card" [class.caught]="pokemon.catched" [class.not-caught]="!pokemon.catched">
       <img [src]="pokemon.image" alt="{{ pokemon.name }}">
       <p class="pokemon-title">{{ pokemon.name }}</p>
-      <button (click)="catchAndSave(pokemon, i)">gotta catch (em all)</button>
+      <button (click)="catchAndSave(pokemon, i, 'save')">gotta catch (em all)</button>
     </div>
   </div>
 </div>
