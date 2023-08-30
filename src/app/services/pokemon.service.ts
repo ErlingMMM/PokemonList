@@ -51,38 +51,43 @@ export class PokemonService {
     updateTrainersPokemons(pokemon: Pokemon, index: number, type: string): Observable<any> {
         const trainer = localStorage.getItem("trainerName");
         const data: Pokemon = {
-          name: pokemon.name,
-          image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`,
-          catched: false,
-          index: index + 1,
-          trainer: trainer || ''
+            name: pokemon.name,
+            image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`,
+            catched: false,
+            index: index + 1,
+            trainer: trainer || ''
         };
-    
+
         return this.httpClient.get<Trainer[]>(`${url}?username=${trainer}`).pipe(
-          switchMap((trainers: Trainer[]) => {
-            if (trainers.length > 0) {
-              const existingTrainer = trainers[0];
-              existingTrainer.pokemon.push(data);
-              return this.httpClient.patch(`${url}/${existingTrainer.id}`, existingTrainer, {
-                headers: {
-                  'X-API-Key': key,
-                  'Content-Type': 'application/json'
+            switchMap((trainers: Trainer[]) => {
+                if (trainers.length > 0) {
+                    const existingTrainer = trainers[0];
+                    if (type === "save") {
+                        existingTrainer.pokemon.push(data);
+                    }else{
+                        existingTrainer.pokemon.splice(index, 1)
+                    }
+
+                    return this.httpClient.patch(`${url}/${existingTrainer.id}`, existingTrainer, {
+                        headers: {
+                            'X-API-Key': key,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                } else {
+                    const newTrainer: Trainer = {
+                        id: uuidv4(),
+                        username: trainer || "",
+                        pokemon: [data]
+                    };
+                    return this.httpClient.post<Trainer>(url, newTrainer, {
+                        headers: {
+                            'X-API-Key': key,
+                            'Content-Type': 'application/json'
+                        }
+                    });
                 }
-              });
-            } else {
-              const newTrainer: Trainer = {
-                id: uuidv4(),
-                username: trainer || "",
-                pokemon: [data]
-              };
-              return this.httpClient.post<Trainer>(url, newTrainer, {
-                headers: {
-                  'X-API-Key': key,
-                  'Content-Type': 'application/json'
-                }
-              });
-            }
-          })
+            })
         );
-      }
+    }
 }
