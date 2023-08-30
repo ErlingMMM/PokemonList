@@ -43,7 +43,6 @@ export class PokemonCataloguePage implements OnInit {
     this.pokemonService.updateTrainersPokemons(pokemon, index, type).subscribe(
       (response) => {
         pokemon.catched = true;
-        alert("Caught and saved!");
       },
       (error) => {
         console.error('Error:', error);
