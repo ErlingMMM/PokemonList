@@ -9,23 +9,21 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./landing-form.component.scss']
 })
 export class LandingFormComponent {
-  constructor(private readonly loginservice: LoginService){}
+  constructor(private readonly loginservice: LoginService) { }
 
-  public onSubmit(loginForm: NgForm) : void {
+  public onSubmit(loginForm: NgForm): void {
     const trainerName = loginForm.value.username;
     console.log("HEHE", trainerName);
 
 
     this.loginservice.loginCheck(trainerName)
-    .subscribe({
-      next: (trainer: Trainer) => {
+      .subscribe({
+        next: (trainer: Trainer) => {
 
-      },
-      error: () => {
+        },
+        error: () => {
 
-      }
-    })
-    
-
+        }
+      })
   }
 }
