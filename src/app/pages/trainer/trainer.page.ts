@@ -35,6 +35,7 @@ export class TrainerPage implements OnInit {
   releasePokemon(pokemon: Pokemon, index: number, type: string): void {
     this.pokemonService.updateTrainersPokemons(pokemon, index, type).subscribe(
       (response) => {
+        this.getPokemonTrainerList();
       },
       (error) => {
         console.error('Error:', error);
