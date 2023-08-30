@@ -26,7 +26,9 @@ export class LoginService {
         return of(response);
       }),
       tap((trainer: Trainer) => {
-        sessionStorage.setItem("trainer", JSON.stringify(trainer))
+        localStorage.setItem("trainer", JSON.stringify(trainer))
+        localStorage.setItem("trainerName", trainer.username)
+
         this.router.navigate(['/trainere']);
       })
     )
