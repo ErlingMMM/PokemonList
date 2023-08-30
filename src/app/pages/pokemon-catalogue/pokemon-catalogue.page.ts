@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { PokemonService } from 'src/app/services/pokemon.service';
 import { Pokemon } from 'src/app/models/pokemon';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environment/environment';
+
+const url = environment.apiUsers
+const key = environment.apiKey
 
 @Component({
   selector: 'app-pokemon-catalogue',
@@ -12,7 +16,7 @@ export class PokemonCataloguePage implements OnInit {
 
   pokemons: Pokemon[] = [];
   buttonText = 'gotta catch (em all)';
-
+ 
 
   constructor(
     private pokemonService: PokemonService,
@@ -42,11 +46,10 @@ export class PokemonCataloguePage implements OnInit {
       index: index + 1,
     };
 
-    const apiKey = 'jP9kL7Hn3RmTqAeWsZcXvYbUgIaOpEfDhCtVrFmNlYbUiTsWxZaQpOeHdCfGjK';
 
-    this.http.post("https://assigment2-api-production.up.railway.app/trainers", data, {
+    this.http.post(url, data, {
       headers: {
-        'X-API-Key': apiKey,
+        'X-API-Key': key,
         'Content-Type': 'application/json'
       }
     }).subscribe(
