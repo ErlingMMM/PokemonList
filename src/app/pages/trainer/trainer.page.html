@@ -1,7 +1,7 @@
 
 <h1>Showing catched pokemons</h1>
 <div class="pokemon-card-container">
-  <div *ngFor="let pokemon of pokemons; let i = index;">
+  <div *ngFor="let pokemon of trainerPokemons; let i = index;">
     <div class="pokemon-card" [class.caught]="pokemon.catched" [class.not-caught]="!pokemon.catched">
       <img [src]="pokemon.image" alt="{{ pokemon.name }}">
       <p class="pokemon-title">{{ pokemon.name }}</p>

@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Pokemon } from "../models/pokemon";
+import { Trainer } from "../models/trainer.model";
 import { Observable, of } from "rxjs";
 import { map, tap, catchError } from 'rxjs/operators';
 
@@ -18,10 +19,10 @@ export class PokemonService {
         );
     }
 
-    getTrainerPokemons(): Observable<Pokemon[]> {
+    getTrainerPokemons(): Observable<Trainer[]> {
         const trainer = localStorage.getItem("trainerName");
         return this.httpClient.get<any>('https://assigment2-api-production.up.railway.app/trainers').pipe(
-            map(response => response.filter((obj: Pokemon) => obj.trainer === trainer)),
+            map(response => response.filter((obj: Trainer) => obj.username === trainer)),
             catchError(error => {
                 console.error("Error fetching data:", error);
                 return of([]); // If there is no pokemons saved for the given trainer, return empty array
