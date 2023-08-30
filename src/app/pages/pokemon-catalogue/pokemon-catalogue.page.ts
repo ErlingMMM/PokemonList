@@ -19,7 +19,7 @@ export class PokemonCataloguePage implements OnInit {
 
   pokemons: Pokemon[] = [];
   buttonText = 'gotta catch (em all)';
- 
+
 
   constructor(
     private pokemonService: PokemonService,
@@ -45,23 +45,23 @@ export class PokemonCataloguePage implements OnInit {
     const trainer = localStorage.getItem("trainerName");
     const data: Pokemon = {
       name: pokemon.name,
-      image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`, 
+      image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`,
       catched: false,
       index: index + 1,
-      trainer: trainer || '', 
+      trainer: trainer || '',
     };
-    
-  
+
+
     // Check if trainer exists
     this.http.get<Trainer[]>(`${url}?username=${trainer}`).subscribe(
       (trainers: Trainer[]) => {
         if (trainers.length > 0) {
           // Trainer already exists, perform a PATCH request
-          const existingTrainer = trainers[0];
+          const existingTrainer = trainers[0];          
           existingTrainer.pokemon.push(data);
 
-  
-          this.http.patch(`${url}/${existingTrainer.id}`, { pokemon: [data.name] }, {
+
+          this.http.patch(`${url}/${existingTrainer.id}`, existingTrainer, {
             headers: {
               'X-API-Key': key,
               'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ export class PokemonCataloguePage implements OnInit {
               console.error('Error:', error);
             }
           );
-          
+
         } else {
           // Trainer doesn't exist, perform a POST request to create
           const newTrainer: Trainer = {
@@ -83,7 +83,7 @@ export class PokemonCataloguePage implements OnInit {
             username: trainer || "",
             pokemon: [data],
           };
-  
+
           this.http.post<Trainer>(url, newTrainer, {
             headers: {
               'X-API-Key': key,
@@ -105,6 +105,4 @@ export class PokemonCataloguePage implements OnInit {
       }
     );
   }
-  
-  
 }
