@@ -56,13 +56,14 @@ export class PokemonCataloguePage implements OnInit {
   updateOffsetPage(offsetChange: number): void {
     const currentOffset = parseInt(sessionStorage.getItem("offsetPage") || "0", 10);
     let newOffset = currentOffset + offsetChange;
-  
+    
     if (newOffset < 0) {
       newOffset = 0;
     } else if (newOffset > 1250) {
       newOffset = 1250;
     }
-  
     sessionStorage.setItem("offsetPage", newOffset.toString());
+
+    this.getPokemonList();
   }
 }

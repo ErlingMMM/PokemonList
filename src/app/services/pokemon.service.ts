@@ -13,6 +13,7 @@ const url = environment.apiUsers
 const key = environment.apiKey
 
 
+
 @Injectable({ providedIn: "root" })
 export class PokemonService {
 
@@ -21,7 +22,8 @@ export class PokemonService {
     }
 
     getPokemons(): Observable<Pokemon[]> {
-        return this.httpClient.get<any>(`https://pokeapi.co/api/v2/pokemon?limit=50&offset=0`).pipe(
+        const currentOffset = parseInt(sessionStorage.getItem("offsetPage") || "0", 10);
+        return this.httpClient.get<any>(`https://pokeapi.co/api/v2/pokemon?limit=50&offset=${currentOffset}`).pipe(
             map(response => response.results)
         );
     }
@@ -46,7 +48,7 @@ export class PokemonService {
     }
 
 
-    
+
     updateTrainersPokemons(pokemon: Pokemon, index: number, type: string): Observable<any> {
         const trainer = localStorage.getItem("trainerName");
         const data: Pokemon = {
@@ -63,7 +65,7 @@ export class PokemonService {
                     const existingTrainer = trainers[0];
                     if (type === "save") {
                         existingTrainer.pokemon.push(data);
-                    }else{
+                    } else {
                         existingTrainer.pokemon.splice(index, 1)
                     }
 
