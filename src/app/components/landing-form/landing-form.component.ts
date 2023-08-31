@@ -10,9 +10,7 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class LandingFormComponent {
   constructor(private readonly loginservice: LoginService) { }
-  constructor(private readonly loginservice: LoginService) { }
 
-  public onSubmit(loginForm: NgForm): void {
   public onSubmit(loginForm: NgForm): void {
     const trainerName = loginForm.value.username;
     console.log("hello trainer", trainerName);
@@ -21,17 +19,10 @@ export class LandingFormComponent {
     this.loginservice.loginCheck(trainerName)
       .subscribe({
         next: (trainer: Trainer) => {
-      .subscribe({
-        next: (trainer: Trainer) => {
 
         },
         error: () => {
-        },
-        error: () => {
-
         }
       })
-
-
   }
 }
