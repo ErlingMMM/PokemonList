@@ -1,4 +1,5 @@
-<a routerLink="">TrainerPage</a>
-<a routerLink="login">LandingPage</a>
-<a routerLink="pokemons">PokemonCataloguePage</a>
+<a routerLink="trainere" *ngIf="authService.getisLoggedIn()">TrainerPage</a>
+<a routerLink="pokemons" *ngIf="authService.getisLoggedIn()">PokemonCataloguePage</a>
+<a routerLink="login" *ngIf="!authService.getisLoggedIn()">LandingPage</a>
+<a (click)="logOut()" *ngIf="authService.getisLoggedIn()">Log Out</a>
 <router-outlet></router-outlet>
