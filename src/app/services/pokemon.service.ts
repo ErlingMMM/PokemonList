@@ -17,9 +17,7 @@ const key = environment.apiKey
 @Injectable({ providedIn: "root" })
 export class PokemonService {
 
-    constructor(private readonly httpClient: HttpClient) {
-
-    }
+    constructor(private readonly httpClient: HttpClient) {}
 
     getPokemons(): Observable<Pokemon[]> {
         const currentOffset = parseInt(sessionStorage.getItem("offsetPage") || "0", 10);
