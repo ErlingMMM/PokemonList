@@ -7,8 +7,8 @@ import { environment } from 'src/environment/environment';
 
 const url = environment.apiUsers
 const key = environment.apiKey
-sessionStorage.setItem("offsetPage", "0")
-const offsetStorage = sessionStorage.getItem("offsetPage")
+
+
 
 
 @Component({
@@ -53,10 +53,21 @@ export class PokemonCataloguePage implements OnInit {
     );
   }
 
-  onButtonClicked(): void {
-    console.log("button clicked");
-    
-    
+  nextPage(): void {
+    const currentOffset = parseInt(sessionStorage.getItem("offsetPage") || "0", 10);
+    let newOffset = currentOffset + 50;
+    if (newOffset >= 1250) {
+      newOffset = 1250
+    }
+    sessionStorage.setItem("offsetPage", newOffset.toString());
+  }
 
+  previousPage(): void {
+    const currentOffset = parseInt(sessionStorage.getItem("offsetPage") || "0", 10);
+    let newOffset = currentOffset - 50;
+    if (newOffset <= 0) {
+      newOffset = 0
+    }
+    sessionStorage.setItem("offsetPage", newOffset.toString());
   }
 }
