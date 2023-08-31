@@ -53,21 +53,16 @@ export class PokemonCataloguePage implements OnInit {
     );
   }
 
-  nextPage(): void {
+  updateOffsetPage(offsetChange: number): void {
     const currentOffset = parseInt(sessionStorage.getItem("offsetPage") || "0", 10);
-    let newOffset = currentOffset + 50;
-    if (newOffset >= 1250) {
-      newOffset = 1250
+    let newOffset = currentOffset + offsetChange;
+  
+    if (newOffset < 0) {
+      newOffset = 0;
+    } else if (newOffset > 1250) {
+      newOffset = 1250;
     }
-    sessionStorage.setItem("offsetPage", newOffset.toString());
-  }
-
-  previousPage(): void {
-    const currentOffset = parseInt(sessionStorage.getItem("offsetPage") || "0", 10);
-    let newOffset = currentOffset - 50;
-    if (newOffset <= 0) {
-      newOffset = 0
-    }
+  
     sessionStorage.setItem("offsetPage", newOffset.toString());
   }
 }
