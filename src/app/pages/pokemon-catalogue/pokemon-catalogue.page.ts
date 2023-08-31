@@ -7,6 +7,9 @@ import { environment } from 'src/environment/environment';
 
 const url = environment.apiUsers
 const key = environment.apiKey
+sessionStorage.setItem("offsetPage", "0")
+const offsetStorage = sessionStorage.getItem("offsetPage")
+
 
 @Component({
   selector: 'app-pokemon-catalogue',
@@ -29,11 +32,11 @@ export class PokemonCataloguePage implements OnInit {
   }
 
   getPokemonList(): void {
-    this.pokemonService.getPokemons(50)
+    this.pokemonService.getPokemons()
       .subscribe(pokemonList => {
         this.pokemons = pokemonList.map((pokemon, index) => ({
           ...pokemon,
-          image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + (1 + 50)}.png`,
+          image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`,
           catched: false
         }));
       });
@@ -48,5 +51,12 @@ export class PokemonCataloguePage implements OnInit {
         console.error('Error:', error);
       }
     );
+  }
+
+  onButtonClicked(): void {
+    console.log("button clicked");
+    
+    
+
   }
 }

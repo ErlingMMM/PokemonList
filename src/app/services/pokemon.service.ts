@@ -20,8 +20,8 @@ export class PokemonService {
 
     }
 
-    getPokemons(offset: number): Observable<Pokemon[]> {
-        return this.httpClient.get<any>(`https://pokeapi.co/api/v2/pokemon?limit=50&offset=${offset}`).pipe(
+    getPokemons(): Observable<Pokemon[]> {
+        return this.httpClient.get<any>(`https://pokeapi.co/api/v2/pokemon?limit=50&offset=0`).pipe(
             map(response => response.results)
         );
     }
