@@ -29,11 +29,11 @@ export class PokemonCataloguePage implements OnInit {
   }
 
   getPokemonList(): void {
-    this.pokemonService.getPokemons()
+    this.pokemonService.getPokemons(50)
       .subscribe(pokemonList => {
         this.pokemons = pokemonList.map((pokemon, index) => ({
           ...pokemon,
-          image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`,
+          image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + (1 + 50)}.png`,
           catched: false
         }));
       });
