@@ -32,11 +32,12 @@ export class PokemonCataloguePage implements OnInit {
   }
 
   getPokemonList(): void {
+    const currentOffset = parseInt(sessionStorage.getItem("offsetPage") || "0", 10);
     this.pokemonService.getPokemons()
       .subscribe(pokemonList => {
         this.pokemons = pokemonList.map((pokemon, index) => ({
           ...pokemon,
-          image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`,
+          image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + (1 + currentOffset)}.png`,
           catched: false
         }));
       });
@@ -56,7 +57,7 @@ export class PokemonCataloguePage implements OnInit {
   updateOffsetPage(offsetChange: number): void {
     const currentOffset = parseInt(sessionStorage.getItem("offsetPage") || "0", 10);
     let newOffset = currentOffset + offsetChange;
-    
+
     if (newOffset < 0) {
       newOffset = 0;
     } else if (newOffset > 1250) {
