@@ -4,8 +4,12 @@ import { Pokemon } from 'src/app/models/pokemon';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environment/environment';
 
+
 const url = environment.apiUsers
 const key = environment.apiKey
+
+
+
 
 @Component({
   selector: 'app-pokemon-catalogue',
@@ -16,7 +20,7 @@ export class PokemonCataloguePage implements OnInit {
 
   pokemons: Pokemon[] = [];
   buttonText = 'gotta catch (em all)';
- 
+
 
   constructor(
     private pokemonService: PokemonService,
@@ -28,38 +32,39 @@ export class PokemonCataloguePage implements OnInit {
   }
 
   getPokemonList(): void {
+    const currentOffset = parseInt(sessionStorage.getItem("offsetPage") || "0", 10);
     this.pokemonService.getPokemons()
       .subscribe(pokemonList => {
         this.pokemons = pokemonList.map((pokemon, index) => ({
           ...pokemon,
-          image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`,
+          image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + (1 + currentOffset)}.png`,
           catched: false
         }));
       });
   }
 
-  catchAndSave(pokemon: Pokemon, index: number): void {
-    const trainer = localStorage.getItem("trainerName");
-    const data = {
-      name: pokemon.name,
-      trainer: trainer,
-      index: index + 1,
-    };
-
-
-    this.http.post(url, data, {
-      headers: {
-        'X-API-Key': key,
-        'Content-Type': 'application/json'
-      }
-    }).subscribe(
-      response => {
+  catchAndSave(pokemon: Pokemon, index: number, type: string): void {
+    this.pokemonService.updateTrainersPokemons(pokemon, index, type).subscribe(
+      (response) => {
         pokemon.catched = true;
-        alert("Catched!")
       },
-      error => {
+      (error) => {
         console.error('Error:', error);
       }
     );
+  }
+
+  updateOffsetPage(offsetChange: number): void {
+    const currentOffset = parseInt(sessionStorage.getItem("offsetPage") || "0", 10);
+    let newOffset = currentOffset + offsetChange;
+
+    if (newOffset < 0) {
+      newOffset = 0;
+    } else if (newOffset > 1250) {
+      newOffset = 1250;
+    }
+    sessionStorage.setItem("offsetPage", newOffset.toString());
+
+    this.getPokemonList();
   }
 }

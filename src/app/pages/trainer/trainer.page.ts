@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TrainerPage implements OnInit {
 
-  pokemons: Pokemon[] = [];
+  trainerPokemons: Pokemon[] = [];
 
   constructor(
     private pokemonService: PokemonService,
@@ -23,15 +23,24 @@ export class TrainerPage implements OnInit {
 
   getPokemonTrainerList(): void {
     this.pokemonService.getTrainerPokemons()
-      .subscribe(pokemonList => {
-        if (pokemonList) {
-          this.pokemons = pokemonList.map((pokemon) => ({
-            ...pokemon,
-            image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.index}.png`,
-          }));
+      .subscribe(trainerList => {
+        if (trainerList.length > 0) {
+          this.trainerPokemons = trainerList[0].pokemon;
         } else {
-          console.error('Pokemon list is undefined.');
+          console.error('Trainer list is empty.');
         }
       });
   }
+
+  releasePokemon(pokemon: Pokemon, index: number, type: string): void {
+    this.pokemonService.updateTrainersPokemons(pokemon, index, type).subscribe(
+      (response) => {
+        this.getPokemonTrainerList();
+      },
+      (error) => {
+        console.error('Error:', error);
+      }
+    );
+  }
+
 }

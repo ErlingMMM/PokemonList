@@ -1,5 +1,7 @@
-export  interface Trainer{
-    username:string;
-    pokemon: [];
+import { Pokemon } from "./pokemon";
 
+export  interface Trainer{
+    id: string;
+    username:string;
+    pokemon: Pokemon[];
 }
