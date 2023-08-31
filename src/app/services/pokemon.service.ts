@@ -46,8 +46,7 @@ export class PokemonService {
     }
 
 
-
-
+    
     updateTrainersPokemons(pokemon: Pokemon, index: number, type: string): Observable<any> {
         const trainer = localStorage.getItem("trainerName");
         const data: Pokemon = {
