@@ -39,7 +39,7 @@ export class PokemonCataloguePage implements OnInit {
   }
 
   catchAndSave(pokemon: Pokemon, index: number): void {
-    const trainer = localStorage.getItem("trainer");
+    const trainer = localStorage.getItem("trainerName");
     const data = {
       name: pokemon.name,
       trainer: trainer,

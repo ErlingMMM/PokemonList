@@ -19,7 +19,7 @@ export class PokemonService {
     }
 
     getTrainerPokemons(): Observable<Pokemon[]> {
-        const trainer = localStorage.getItem("trainer");
+        const trainer = localStorage.getItem("trainerName");
         return this.httpClient.get<any>('https://assigment2-api-production.up.railway.app/trainers').pipe(
             map(response => response.filter((obj: Pokemon) => obj.trainer === trainer)),
             catchError(error => {

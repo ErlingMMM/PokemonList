@@ -28,6 +28,7 @@ export class LoginService {
         }),
         tap((trainer: Trainer) => {
           sessionStorage.setItem("trainer", JSON.stringify(trainer))
+          localStorage.setItem("trainerName", trainer.username)
           this.authService.login();
           this.router.navigate(['/pokemons']);
         })
