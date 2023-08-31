@@ -51,11 +51,12 @@ export class PokemonService {
 
     updateTrainersPokemons(pokemon: Pokemon, index: number, type: string): Observable<any> {
         const trainer = localStorage.getItem("trainerName");
+        const currentOffset = parseInt(sessionStorage.getItem("offsetPage") || "0", 10);
         const data: Pokemon = {
             name: pokemon.name,
-            image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`,
+            image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + (1 + currentOffset)}.png`,
             catched: false,
-            index: index + 1,
+            index: index + (1 + currentOffset),
             trainer: trainer || ''
         };
 
