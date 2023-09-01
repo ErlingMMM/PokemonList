@@ -9,29 +9,23 @@ import { Pokemon } from 'src/app/models/pokemon';
 })
 export class PokemonListComponent implements OnInit {
 
+  // Array declared for storing Pokemon data from model
   pokemons: Pokemon[] = [];
 
+  // Constructor for service
   constructor(private pokemonService: PokemonService) { }
 
+  //Lifecycle for component
   ngOnInit(): void {
+    //Run function for listing the Pokemons when the component is initialized
     this.getPokemonList();
   }
 
+  //Fetch the list of Pokemons
   getPokemonList(): void {
     this.pokemonService.getPokemons()
       .subscribe(pokemonList => {
         this.pokemons = pokemonList;
-        this.fetchPokemonDetails();
       });
-  }
-
-  fetchPokemonDetails(): void {
-    this.pokemons.forEach(pokemon => {
-      this.pokemonService.getPokemonByName(pokemon.name)
-        .subscribe(details => {
-          console.log('Fetched Pokemon:', details);
-        
-        });
-    });
   }
 }

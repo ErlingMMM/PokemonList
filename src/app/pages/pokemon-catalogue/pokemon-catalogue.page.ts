@@ -17,7 +17,7 @@ const key = environment.apiKey
 export class PokemonCataloguePage implements OnInit {
 
   pokemons: Pokemon[] = [];
-  buttonText = 'gotta catch (em all)';
+  //Previous page button is grey when boolean is true
   isOnFirstPage: boolean = false;
 
 
@@ -28,6 +28,7 @@ export class PokemonCataloguePage implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    //sessionStorage to navigate pages
     const currentOffset = parseInt(sessionStorage.getItem("offsetPage") || "0", 10);
     this.isOnFirstPage = currentOffset === 0;
     this.getPokemonList();
@@ -39,6 +40,9 @@ export class PokemonCataloguePage implements OnInit {
       .subscribe(pokemonList => {
         this.pokemons = pokemonList.map((pokemon, index) => ({
           ...pokemon,
+          //Image selected for each Pokemon. 
+          //The number of the Pokoemon in the API is selected by the index of the 50 Pokemons in the page 
+          //+ the number of the offset + 1 because of 0 indexing. 
           image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + (1 + currentOffset)}.png`,
           catched: false
         }));
@@ -56,10 +60,12 @@ export class PokemonCataloguePage implements OnInit {
     );
   }
 
+  //Updating the offset in the session storage meant for the API call every time the navigation buttons is clicked.
   updateOffsetPage(offsetChange: number): void {
     const currentOffset = parseInt(sessionStorage.getItem("offsetPage") || "0", 10);
     let newOffset = currentOffset + offsetChange;
 
+    //Offset can never be greater than 1250 because of the total number of Pokemons. 
     if (newOffset < 0) {
       newOffset = 0;
     } else if (newOffset > 1250) {
@@ -67,7 +73,7 @@ export class PokemonCataloguePage implements OnInit {
     }
     sessionStorage.setItem("offsetPage", newOffset.toString());
     this.isOnFirstPage = newOffset === 0;
-    
+    //List Pokoemons again after we set the new offset value
     this.getPokemonList();
 
   }
