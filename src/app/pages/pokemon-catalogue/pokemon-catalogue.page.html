@@ -1,5 +1,5 @@
 <h1>Showing 50 pokemons</h1>
-<button (click)="updateOffsetPage(-50)">Previous Page</button>
+<button (click)="updateOffsetPage(-50)" [class.blue-background]="isOnFirstPage">Previous Page</button>
 <button (click)="updateOffsetPage(50)">Next page</button>
 
 
