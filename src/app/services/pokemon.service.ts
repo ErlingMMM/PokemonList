@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Pokemon } from "../models/pokemon";
 import { Trainer } from "../models/trainer.model";
 import { Observable, of } from "rxjs";
-import { map, tap, catchError } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { environment } from 'src/environment/environment';
 import { v4 as uuidv4 } from 'uuid';
 import { switchMap } from "rxjs/operators";
