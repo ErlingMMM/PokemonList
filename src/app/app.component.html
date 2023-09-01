@@ -1,5 +1,5 @@
-<a routerLink="trainere" *ngIf="authService.getisLoggedIn()">TrainerPage</a>
-<a routerLink="pokemons" *ngIf="authService.getisLoggedIn()">PokemonCataloguePage</a>
-<a routerLink="login" *ngIf="!authService.getisLoggedIn()">LandingPage</a>
-<a (click)="logOut()" *ngIf="authService.getisLoggedIn()">Log Out</a>
+<a routerLink="trainere" *ngIf="authService.getisLoggedIn()">Trainer</a>
+<a routerLink="pokemons" *ngIf="authService.getisLoggedIn()">PokemonCatalogue</a>
+<a (click)="logOut()" *ngIf="authService.getisLoggedIn()" class="red-button">
+    <span><img src="assets/logout.png" alt="Logout Icon" /></span> Log Out</a>
 <router-outlet></router-outlet>

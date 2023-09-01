@@ -12,17 +12,19 @@ export class LandingFormComponent {
   constructor(private readonly loginservice: LoginService) { }
 
   public onSubmit(loginForm: NgForm): void {
-    const trainerName = loginForm.value.username;
-    console.log("hello trainer", trainerName);
+    if (loginForm.valid) {
+      const trainerName = loginForm.value.username;
+      console.log("hello trainer", trainerName);
 
-    // Call loginCheck handle response from service and handle responses and erros.
-    this.loginservice.loginCheck(trainerName)
-      .subscribe({
-        next: (trainer: Trainer) => {
+      // Call loginCheck handle response from service and handle responses and erros.
+      this.loginservice.loginCheck(trainerName)
+        .subscribe({
+          next: (trainer: Trainer) => {
 
-        },
-        error: () => {
-        }
-      })
+          },
+          error: () => {
+          }
+        })
+    }
   }
 }

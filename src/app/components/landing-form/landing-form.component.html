@@ -1,6 +1,6 @@
 <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
-  <label for="username">Enter Trainer:</label>
-  <input type="text" id="username" name="username" ngModel #name="ngModel" />
+  <label for="username" class="custom-label">Enter Trainer:</label>
+  <input type="text" id="username" name="username" ngModel #name="ngModel" class="custom-input" required />
 
-  <button type="submit">Login</button>
+  <button type="submit" class="custom-button" [disabled]="!loginForm.valid">Login</button>
 </form>
