@@ -1,6 +1,6 @@
 <h1>Showing 50 pokemons</h1>
-<button (click)="updateOffsetPage(-50)" [class.blue-background]="isOnFirstPage">Previous Page</button>
-<button (click)="updateOffsetPage(50)">Next page</button>
+<button (click)="updateOffsetPage(-50)" [class.disabled-button]="isOnFirstPage" [class.button]="!isOnFirstPage">Previous Page</button>
+<button (click)="updateOffsetPage(50)" class="button">Next page</button>
 
 
 <div class="pokemon-card-container">

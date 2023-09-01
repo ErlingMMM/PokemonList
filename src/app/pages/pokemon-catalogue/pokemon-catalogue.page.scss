@@ -8,8 +8,21 @@
     background-color: #8df3a8;
   }
 
-  .blue-background {
-    background-color: blue;
+  .disabled-button {
+    background-color: rgb(233, 224, 224);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10%;
+    cursor: not-allowed;
+  }
+
+  .button {
+    background-color: #a88df3;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10%;
+    cursor: pointer;
+   
   }
 
 
