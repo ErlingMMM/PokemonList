@@ -48,6 +48,7 @@ To get more help on the Angular CLI, use `ng help` or go check out the [Angular 
 - When a user logs in for the first time with a new username (trainer name), the username is saved in the API.
 - After logging in, users are redirected to the main page, which is the Pokémon catalog.
 - In the main page, users can view a list of all Pokémon with their images and names. Users can navigate between pages to load 50 more Pokémon.
+- While the user is on the first page, the previous button is gray and on hover the cursor displays a "not allowed" sign. 
 - Users can capture Pokémon by clicking the button for a specific Pokémon. When they do, the corresponding item in the CSS container changes from green to red, and the Pokémon's name and image URL are saved in the API as caught by the logged-in trainer.
 - In the trainer page, captured Pokémon saved in the API for the logged-in user are displayed with their correct images and names.
 - There is a button to release Pokémon. Clicking it removes the Pokémon from the trainer's list, causing it to disappear from the trainer page and be removed from the list of Pokémon for the given trainer.

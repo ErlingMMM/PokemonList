@@ -9,8 +9,6 @@ const url = environment.apiUsers
 const key = environment.apiKey
 
 
-
-
 @Component({
   selector: 'app-pokemon-catalogue',
   templateUrl: './pokemon-catalogue.page.html',
@@ -20,6 +18,8 @@ export class PokemonCataloguePage implements OnInit {
 
   pokemons: Pokemon[] = [];
   buttonText = 'gotta catch (em all)';
+  isOnFirstPage: boolean = false;
+
 
 
   constructor(
@@ -28,6 +28,8 @@ export class PokemonCataloguePage implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    const currentOffset = parseInt(sessionStorage.getItem("offsetPage") || "0", 10);
+    this.isOnFirstPage = currentOffset === 0;
     this.getPokemonList();
   }
 
@@ -64,7 +66,9 @@ export class PokemonCataloguePage implements OnInit {
       newOffset = 1250;
     }
     sessionStorage.setItem("offsetPage", newOffset.toString());
-
+    this.isOnFirstPage = newOffset === 0;
+    
     this.getPokemonList();
+
   }
 }
