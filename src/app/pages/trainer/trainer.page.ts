@@ -42,5 +42,4 @@ export class TrainerPage implements OnInit {
       }
     );
   }
-
 }

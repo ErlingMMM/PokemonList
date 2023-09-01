@@ -17,7 +17,7 @@ const key = environment.apiKey
 @Injectable({ providedIn: "root" })
 export class PokemonService {
 
-    constructor(private readonly httpClient: HttpClient) {}
+    constructor(private readonly httpClient: HttpClient) { }
 
     getPokemons(): Observable<Pokemon[]> {
         const currentOffset = parseInt(sessionStorage.getItem("offsetPage") || "0", 10);
@@ -36,15 +36,6 @@ export class PokemonService {
             })
         );
     }
-
-
-    getPokemonByName(name: string): Observable<Pokemon> {
-        return this.httpClient.get<Pokemon>(`https://pokeapi.co/api/v2/pokemon/${name}`)
-            .pipe(
-                tap(data => console.log(`Fetched Pokemon ${name} Details:`, data))
-            );
-    }
-
 
 
     updateTrainersPokemons(pokemon: Pokemon, index: number, type: string): Observable<any> {
